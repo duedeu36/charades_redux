@@ -42,7 +42,7 @@ const mapStateToProps = state => ({
 });
 
 // const mapDispatchToProps = dispatch => ({
-//   activePlayer: player => dispatch({ type: 'ACTIVE_PLAYER', data: player })
+//   nextPlayer: () => dispatch({ type: 'NEXT_PLAYER' })
 // });
 
 export default connect(

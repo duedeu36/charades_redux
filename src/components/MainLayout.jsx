@@ -68,15 +68,6 @@ class MainLayout extends Component {
 
   nextPlayerHandler = () => {
     this.props.nextPlayer();
-    // const playerArray = [...this.props.players];
-    // console.log(playerArray);
-    // for (var i = 0; (i = i % playerArray.length); i++) {
-    //   return (playerArray[i].active = true);
-    // }
-    // // this.setState({
-    // //   players: playerArray
-    // // });
-    // console.log(playerArray[i]);
   };
 
   render() {

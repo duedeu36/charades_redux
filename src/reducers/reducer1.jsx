@@ -1,12 +1,12 @@
 const initialState = {
   words: [],
-  randomWords: ['test'],
+  randomWords: [],
   modalOpen: false,
   gameStarted: true,
   players: [
     { id: 1, name: 'damir', score: 3, active: false, display: true },
-    { id: 2, name: 'damir333', score: 3, active: false, display: true },
-    { id: 3, name: 'nemer, the tiger', score: 5, active: false, display: true }
+    { id: 2, name: 'hamid', score: 3, active: false, display: true },
+    { id: 3, name: 'nemer', score: 5, active: false, display: true }
   ],
   clicked: false,
   lastInsertId: 4,
@@ -42,7 +42,7 @@ export default function(state = initialState, action) {
       };
     case 'ACTIVE_PLAYER':
       // alert();
-      let players2 = [...state.players];
+      let players2 = [...state.players]; // how make same variable in different cases
       players2.map(player => {
         player.active = false;
       });
@@ -56,16 +56,22 @@ export default function(state = initialState, action) {
         players: players2
       };
     case 'NEXT_PLAYER':
-      alert();
-      const playerArray = [...state.players];
-      console.log(playerArray);
-      for (var i = 0; (i = i % playerArray.length); i++) {
-        return (playerArray[i].active = true);
+      // alert();
+      let playerArray = [...state.players];
+      // find/tell/show me the index where the player.active is true:
+      let index = playerArray.findIndex(player => player.active == true);
+      console.log('index of player.active = true: ', index);
+
+      if (index == playerArray.length - 1) {
+        playerArray[index].active = false;
+        // if index is the last element in the array
+        index = 0;
+        playerArray[index].active = true;
+      } else {
+        playerArray[index].active = false;
+        index++;
+        playerArray[index].active = true;
       }
-      // this.setState({
-      //   players: playerArray
-      // });
-      console.log(playerArray[i]);
 
       return {
         ...state,
