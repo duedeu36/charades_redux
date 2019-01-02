@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Row, Col } from 'reactstrap';
 import UsedWords from './UsedWords';
+import Countdown from './Countdown';
 import ScoreBoard from './ScoreBoard';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -34,17 +35,8 @@ class MainLayout extends Component {
   };
 
   diceWordHandler = () => {
+    this.state.clicked = true;
     this.props.diceWords2();
-
-    // // score logic
-    // // scoreHandler = () => {
-    // let playerArray = [...this.state.players];
-    // playerArray.map(player => {
-    //   player.active === true && this.state.clicked === true
-    //     ? (player.score = player.score + 1)
-    //     : console.log('hallo');
-    // });
-    // };
   };
 
   addWordIntoArray = () => {
@@ -57,13 +49,7 @@ class MainLayout extends Component {
   };
 
   deleteWordHandler = e => {
-    const copyArrayWords = [...this.state.words];
-    const toRemove = copyArrayWords.filter(f => f !== this.state.inputValue);
-
-    this.setState({
-      words: toRemove
-    });
-    console.log(this.state.inputValue);
+    this.props.deleteWord(this.state.inputValue);
   };
 
   nextPlayerHandler = () => {
@@ -73,13 +59,24 @@ class MainLayout extends Component {
   render() {
     return (
       <Container>
+        <Countdown />
         <Row>
           <Col sm="12" md={{ size: 10, offset: 1 }}>
             <div>
               <Card className="form-group bg-light">
-                <h1 className="m-3 d-flex justify-content-center text-dark ">
-                  {this.props.randomWord}
-                </h1>
+                {this.state.clicked ? (
+                  <h1 className="m-3 d-flex justify-content-center text-dark ">
+                    {this.props.randomWord}
+                  </h1>
+                ) : (
+                  <h1 className="m-3 d-flex justify-content-center text-dark ">
+                    ...
+                  </h1>
+                )}
+                {/* {this.props.words.length == 0
+                  ? alert('Game over! Winner is: ')
+                  : null}
+                {console.log(this.props.words)} */}
                 <input
                   type="text"
                   placeholder="Enter here"
@@ -155,7 +152,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addWords: words => dispatch({ type: 'ADD_WORDS', data: words }),
   diceWords2: diceWords => dispatch({ type: 'DICE_WORDS', data: diceWords }),
-  nextPlayer: () => dispatch({ type: 'NEXT_PLAYER' })
+  nextPlayer: () => dispatch({ type: 'NEXT_PLAYER' }),
+  deleteWord: word => dispatch({ type: 'DELETE_WORD', data: word })
 });
 
 export default connect(

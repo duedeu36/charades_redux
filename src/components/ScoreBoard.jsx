@@ -3,6 +3,10 @@ import { Table } from 'reactstrap';
 import { connect } from 'react-redux';
 
 class ScoreBoard extends Component {
+  // scoreHandler = () => {
+
+  // }
+
   render() {
     return (
       <div className="">

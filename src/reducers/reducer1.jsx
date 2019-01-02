@@ -1,5 +1,5 @@
 const initialState = {
-  words: [],
+  words: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
   randomWords: [],
   modalOpen: false,
   gameStarted: true,
@@ -9,8 +9,8 @@ const initialState = {
     { id: 3, name: 'nemer', score: 5, active: false, display: true }
   ],
   clicked: false,
-  lastInsertId: 4,
-  inputValue: ''
+  lastInsertId: 4
+  // inputValue: ''
 };
 
 export default function(state = initialState, action) {
@@ -62,6 +62,8 @@ export default function(state = initialState, action) {
       let index = playerArray.findIndex(player => player.active == true);
       console.log('index of player.active = true: ', index);
 
+      // if (playerArray[index].active === undefined) {
+      // playerArray[0].active = true;
       if (index == playerArray.length - 1) {
         playerArray[index].active = false;
         // if index is the last element in the array
@@ -72,6 +74,7 @@ export default function(state = initialState, action) {
         index++;
         playerArray[index].active = true;
       }
+      // }
 
       return {
         ...state,
@@ -84,8 +87,8 @@ export default function(state = initialState, action) {
 
       return {
         ...state,
-        words: words,
-        inputValue: state.inputValue
+        words: words
+        // inputValue: state.inputValue
       };
     case 'DICE_WORDS':
       // alert('hallo2');
@@ -106,6 +109,19 @@ export default function(state = initialState, action) {
         clicked: true,
         // if I delete this... randomWord can not be passed as props
         randomWord: randomWord
+      };
+    case 'DELETE_WORD':
+      // alert('hallo2');
+      let words3 = [...state.words];
+      console.log('words3: ', words3);
+      let toRemove = words3.filter(f => f !== action.data);
+      console.log('inputValue: ', action.data);
+      console.log('toRemove: ', toRemove);
+
+      return {
+        ...state,
+        words: toRemove,
+        inputValue: action.data
       };
 
     default:

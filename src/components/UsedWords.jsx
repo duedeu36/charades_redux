@@ -19,7 +19,7 @@ class UsedWords extends Component {
           <tbody>
             {this.props.randomWords.map(word => {
               return (
-                <tr>
+                <tr key={word.id}>
                   <td>{word.randomWord}</td>
                 </tr>
               );

@@ -5,6 +5,7 @@ import StartGameModal from './components/StartGameModal';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Button } from 'reactstrap';
+
 class App extends Component {
   render() {
     return (
@@ -20,6 +21,7 @@ class App extends Component {
             ) : null}
 
             <StartGameModal />
+
             <Switch>
               <Route exact path="/" component={StartGameModal} />
 
